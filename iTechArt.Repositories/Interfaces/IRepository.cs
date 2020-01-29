@@ -11,7 +11,7 @@ namespace iTechArt.Repositories.Interfaces
 
         Task<T> GetByIdAsync(object id);
 
-        Task<IReadOnlyCollection<T>> WhereAsync(Expression<Func<T, bool>> predecate);
+        Task<IReadOnlyCollection<T>> WhereAsync(Expression<Func<T, bool>> predicate);
 
         void Add(T entity);
 

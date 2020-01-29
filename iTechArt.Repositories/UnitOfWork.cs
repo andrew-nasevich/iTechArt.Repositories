@@ -6,16 +6,17 @@ using iTechArt.Repositories.Interfaces;
 
 namespace iTechArt.Repositories
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork<TContext> : IUnitOfWork, IDisposable 
+        where TContext : DbContext
     {
-        protected readonly DbContext Context;
+        protected readonly TContext Context;
 
         private readonly IDictionary<Type, object> _repositories;
 
         private bool _disposed;
 
 
-        public UnitOfWork(DbContext dbContext)
+        public UnitOfWork(TContext dbContext)
         {
             Context = dbContext;
             _repositories = new Dictionary<Type, object>();

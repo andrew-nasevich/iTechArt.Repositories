@@ -10,14 +10,14 @@ namespace iTechArt.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly DbContext _сontext;
+        private readonly DbContext _context;
         private readonly DbSet<T> _entities;
 
 
-        public Repository(DbContext сontext) 
+        public Repository(DbContext context) 
         {
-            _сontext = сontext;
-            _entities = _сontext.Set<T>();
+            _context = context;
+            _entities = _context.Set<T>();
         }
 
 
@@ -26,14 +26,14 @@ namespace iTechArt.Repositories
             return await GetAllQuery().ToListAsync();
         }
 
-        public async virtual Task<T> GetByIdAsync(object id)
+        public virtual async Task<T> GetByIdAsync(object id)
         {
             return await _entities.FindAsync(id);
         }
 
-        public async Task<IReadOnlyCollection<T>> WhereAsync(Expression<Func<T, bool>> predecate)
+        public async Task<IReadOnlyCollection<T>> WhereAsync(Expression<Func<T, bool>> predicate)
         {
-            return await GetAllQuery().Where(predecate).ToListAsync();
+            return await GetAllQuery().Where(predicate).ToListAsync();
         }
 
         public void Add(T entity)
@@ -49,7 +49,7 @@ namespace iTechArt.Repositories
 
         public void Update(T entity)
         {
-            _сontext.Entry(entity).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
 
